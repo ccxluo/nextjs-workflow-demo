@@ -33,7 +33,7 @@ jobs:
       uses: amondnet/vercel-action@v20
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }} # Set this in your repo secrets
-        vercel-id: ${{ secrets.VERCEL_ID }} # Set this in your repo secrets
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Set this in your repo secrets
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Set this in your repo secrets
         # Below are optional parameters
         vercel-args: '--prod' # Deploy to production
