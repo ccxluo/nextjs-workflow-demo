@@ -38,4 +38,3 @@ jobs:
         # Below are optional parameters
         vercel-args: '--prod' # Deploy to production
         working-directory: './' # Directory to deploy
-        alias-domains: 'your-custom-domain.com' # Custom domain, if needed
