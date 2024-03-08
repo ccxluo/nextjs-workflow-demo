@@ -7,7 +7,15 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-deploy:
+  Tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    # - name: Run tests
+    #  run: npm run test
+  Build:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,12 +29,15 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    # - name: Run tests
-    #  run: npm run test
-
     - name: Build
       run: npm run build
-      
+
+  Deploy:
+  runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
     # Deployment Step
     # This step will vary depending on your hosting provider (Vercel, Netlify, AWS, etc.)
     - name: Deploy
