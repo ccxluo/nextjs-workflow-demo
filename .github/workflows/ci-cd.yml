@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  Pre-Check:
-    name: Run Pre-Check Validations
+  build-and-deploy:
+    name: build and deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,45 +23,20 @@ jobs:
 
       - name: ESLint Check
         run: npm run lint
-  Tests:
-    runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@v2
+      # - name: Run tests
+      #  run: npm run test
 
-    # - name: Run tests
-    #  run: npm run test
-  Build:
-    runs-on: ubuntu-latest
+      - name: Build
+        run: npm run build
 
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18' # Specify the Node.js version
-
-    - name: Install dependencies
-      run: npm install
-
-    - name: Build
-      run: npm run build
-
-  Deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    
-    # Deployment Step
-    # This step will vary depending on your hosting provider (Vercel, Netlify, AWS, etc.)
-    - name: Deploy
-      uses: amondnet/vercel-action@v20
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }} # Set this in your repo secrets
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Set this in your repo secrets
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Set this in your repo secrets
-        # Below are optional parameters
-        vercel-args: '--prod' # Deploy to production
-        working-directory: './' # Directory to deploy
+      - name: Deploy
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }} # Set this in your repo secrets
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }} # Set this in your repo secrets
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }} # Set this in your repo secrets
+          # Below are optional parameters
+          vercel-args: '--prod' # Deploy to production
+          working-directory: './' # Directory to deploy
+  
